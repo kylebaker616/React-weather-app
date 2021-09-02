@@ -11,11 +11,10 @@ function App() {
     if (event.key === 'Enter') {
        fetch(`${apiUrl}/weather?q=${query}&units=imperial&APPID=${apiKey}`)
        .then((res) => res.json())
-       .then((result) => {
-         setWeather(result)
+       .then((res) => {
+         setWeather(res)
         setQuery('')
-        console.log(result)
-        console.log(weather)
+        console.log(res)
         })
     }
   }
@@ -51,7 +50,7 @@ function App() {
  return `${day}, ${month} ${date} ${year}` 
 }
   return (
-		<div className='App'>
+		<div className={(typeof weather.main != 'undefined') ? ((weather.main.temp > 60) ? 'app warm' : 'app') : 'app'}>
 			<main>
 				<div className='search-bar'>
 					<input type='text'
@@ -62,15 +61,19 @@ function App() {
             onKeyPress={search}
             />
 				</div>
+        {(typeof weather.main != 'undefined') ? (
+			<div>
 				<div className='location-box'>
-					<div className='location'>{weather.name}</div>
+					<div className='location'>{weather.name}, {weather.sys.country}</div>
 					<br></br>
 					<div className='date'>{dateGetter(new Date())}</div>
 					<div className='weather-box'>
-            <div className="temperature">80 Fahrenheit</div>
-						<div className='weather'>Sunny</div>
+            <div className="temperature">{Math.round(weather.main.temp)}°F</div>
+						<div className='weather'>{weather.weather[0].main}</div>
 					</div>
 				</div>
+			</div>
+				) : ('') }
 			</main>
 		</div>
 	)
