@@ -1,5 +1,7 @@
 {
-  "name": "weatther-app",
+
+  "homepage": "https://kylebaker616.github.io/React-weather-app/",
+  "name": "weather-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

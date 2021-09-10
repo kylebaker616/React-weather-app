@@ -50,7 +50,7 @@ function App() {
  return `${day}, ${month} ${date} ${year}` 
 }
   return (
-		<div className={(typeof weather.main != 'undefined') ? ((weather.main.temp > 60) ? 'app warm' : 'app') : 'app'}>
+		<div className={(typeof weather.main != 'undefined') ? ((weather.weather[0].main === 'Clouds') ? 'app-cloudy' : 'app') : 'app-base'}>
 			<main>
 				<div className='search-bar'>
 					<input type='text'
